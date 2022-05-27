@@ -88,13 +88,31 @@ namespace EntityFrameworkLinQ04
 
         private void button2_Click(object sender, EventArgs e)
         {
+            //using (var db = new ModelFrases())
+            //{
+            //    var query = from f in db.frases select f;
+
+            //    string msg = "";
+
+            //    foreach(var f in query)
+            //    {
+            //        msg += "[" + f.autores.idautor + "] " + f.autores.autor + ": [" + f.idfrase + "] " + f.frase + "\r\n";
+            //    }
+
+            //    msg += "\r\n";
+
+            //    textBox1.Text = msg;
+            //}
+
             using (var db = new ModelFrases())
             {
-                var query = from f in db.frases select f;
+                var query = from f in db.frases
+                            where f.autores.autor.Contains("Albert")
+                            select f;
 
                 string msg = "";
 
-                foreach(var f in query)
+                foreach (var f in query)
                 {
                     msg += "[" + f.autores.idautor + "] " + f.autores.autor + ": [" + f.idfrase + "] " + f.frase + "\r\n";
                 }
