@@ -85,5 +85,24 @@ namespace EntityFrameworkLinQ04
                 textBox1.Text = "Modificación exitosa";
             }
         }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            using (var db = new ModelFrases())
+            {
+                var query = from f in db.frases select f;
+
+                string msg = "";
+
+                foreach(var f in query)
+                {
+                    msg += "[" + f.autores.idautor + "] " + f.autores.autor + ": [" + f.idfrase + "] " + f.frase + "\r\n";
+                }
+
+                msg += "\r\n";
+
+                textBox1.Text = msg;
+            }
+        }
     }
 }
