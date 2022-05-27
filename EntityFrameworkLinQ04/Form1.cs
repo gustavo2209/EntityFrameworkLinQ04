@@ -27,7 +27,7 @@ namespace EntityFrameworkLinQ04
 
                 foreach(var a in query)
                 {
-                    msg += a.autor + "\r\n";
+                    msg += "[" + a.idautor + "]" + a.autor + "\r\n";
 
                     foreach(var f in a.frases)
                     {
@@ -64,7 +64,26 @@ namespace EntityFrameworkLinQ04
 
         private void button4_Click(object sender, EventArgs e)
         {
+            using (var db = new ModelFrases())
+            {
+                var autor = db.autores.Find(4); // busca y retorna el que tiene idautor = 4
+                db.autores.Remove(autor);
+                db.SaveChanges();
 
+                textBox1.Text = "Eliminación exitosa";
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            using (var db = new ModelFrases())
+            {
+                autores autor = db.autores.Where(a => a.autor == "Nuevo Autor 2").First();
+                autor.autor = "Nuevo Autor 2 (modificado)";
+                db.SaveChanges();
+
+                textBox1.Text = "Modificación exitosa";
+            }
         }
     }
 }
